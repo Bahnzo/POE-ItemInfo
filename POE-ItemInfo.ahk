@@ -3504,18 +3504,11 @@ ParseAffixes(ItemDataAffixes, Item)
             AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Prefix", ValueRange, CurrTier), A_Index)
             Continue
         }
-		IfInString, A_LoopField, increased Elemental Damage with Weapons
+	IfInString, A_LoopField, increased Elemental Damage with Weapons
         {
-			; Slinkston edit
-            If (ItemSubType == "Ring" or ItemSubType == "Amulet")
-            {
-                ValueRange := LookupAffixData("data\IncrWeaponEleDmgRingsAmmys.txt", ItemLevel, CurrValue, "", CurrTier)
-            }
-            Else
-				{
-					ValueRange := LookupAffixData("data\IncrWeaponElementalDamage.txt", ItemLevel, CurrValue, "", CurrTier)
-				}
-			NumPrefixes += 1
+            ; Slinkston edit: I initially screwed this up and added ring/ammy only IncrWeaponElementalDamage values. Fixed now
+            NumPrefixes += 1
+            ValueRange := LookupAffixData("data\IncrWeaponElementalDamage.txt", ItemLevel, CurrValue, "", CurrTier)
             AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Prefix", ValueRange, CurrTier), A_Index)
             Continue
         }
