@@ -152,9 +152,9 @@ If (A_AhkVersion <= AHKVersionRequired)
 
 #Include %A_ScriptDir%\data\Messages.txt
 
-#Include lib\globals.ahk
+#Include %A_ScriptDir%\lib\globals.ahk
 
-#Include lib\classes.ahk
+#Include %A_ScriptDir%\lib\classes.ahk
 
 IfNotExist, %A_ScriptDir%\config.ini
 {
@@ -165,7 +165,7 @@ IfNotExist, %A_ScriptDir%\config.ini
     CopyDefaultConfig()
 }
 
-#Include lib\menu.ahk
+#Include %A_ScriptDir%\lib\menu.ahk
 
 IfNotExist, %A_ScriptDir%\data
 {
@@ -177,15 +177,15 @@ IfNotExist, %A_ScriptDir%\data
 
 Fonts.Init(Opts.FontSize, 9)
 
-#Include lib\functions.ahk
+#Include %A_ScriptDir%\lib\functions.ahk
 
-#Include lib\tests.ahk
+#Include %A_ScriptDir%\lib\tests.ahk
 
-#Include lib\gui.ahk
+#Include %A_ScriptDir%\lib\gui.ahk
 
-#Include lib\settings.ahk
+#Include %A_ScriptDir%\lib\settings.ahk
 
-#Include lib\timers.ahk
+#Include %A_ScriptDir%\lib\timers.ahk
 
 ; ############ ADD YOUR OWN MACROS HERE #############
 ;#IfWinActive Path of Exile ahk_class Direct3DWindowClass ahk_exe PathOfExile.exe

@@ -105,7 +105,7 @@ CheckRarityLevel(RarityString)
     return 0 ; unknown rarity. shouldn't happen!
 }
 
-#Include lib\functions\ParseItemType.ahk
+#Include %A_ScriptDir%\lib\functions\ParseItemType.ahk
 
 GetClipboardContents(DropNewlines=False)
 {
@@ -1443,7 +1443,7 @@ LookupRemainingAffixBracket(Filename, ItemLevel, CurrValue, Bracket, ByRef Brack
 }
 
 
-#Include lib\functions\ParseAffixes.ahk
+#Include %A_ScriptDir%\lib\functions\ParseAffixes.ahk
 
 
 ; Change a detail line that was already processed and added to the 
@@ -2042,7 +2042,7 @@ ItemIsMirrored(ItemDataText)
     return False
 }
 
-#Include lib\functions\ParseItemData.ahk
+#Include %A_ScriptDir%\lib\functions\ParseItemData.ahk
 
 GetNegativeAffixOffset(Item)
 {

@@ -198,4 +198,4 @@ class AffixLines_ {
 }
 AffixLines := new AffixLines_()
 
-#Include lib\classes\UserOptions.ahk
+#Include %A_ScriptDir%\lib\classes\UserOptions.ahk
