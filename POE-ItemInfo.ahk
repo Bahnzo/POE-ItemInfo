@@ -1,4 +1,4 @@
-﻿; Path of Exile Item Info Tooltip
+; Path of Exile Item Info Tooltip
 ;
 ; Version: 1.9.2 (hazydoc / IGN:Sadou) Original Author
 ; Script is currently maintained by various people and kept up to date by Bahnzo / IGN:Bahnzo
@@ -550,7 +550,7 @@ CreateSettingsUI()
 
 Menu, TextFiles, Add, Valuable Uniques, EditValuableUniques
 Menu, TextFiles, Add, Valuable Gems, EditValuableGems
-Menu, TextFiles, Add, Dropy Only Gems, EditDropOnlyGems
+Menu, TextFiles, Add, Drop Only Gems, EditDropOnlyGems
 Menu, TextFiles, Add, Currency Rates, EditCurrencyRates
 
 
@@ -785,42 +785,7 @@ ParseItemType(ItemDataStats, ItemDataNamePlate, ByRef BaseType, ByRef SubType, B
     ; Check name plate section 
     Loop, Parse, ItemDataNamePlate, `n, `r
     {
-        ; a few cases that cause incorrect id later
-        ; and thus should come first
-        ; Note: still need to work on proper id for 
-        ; all armour types.
-        IfInString, A_LoopField, Ringmail Gloves
-        {
-            BaseType = Armour
-            SubType = Gloves
-            return
-        }
-        IfInString, A_LoopField, Ringmail Boots
-        {
-            BaseType = Armour
-            SubType = Gloves
-            return
-        }
-        If (RegExMatch(A_LoopField, "Ringmail$"))
-        {
-            BaseType = Armour
-            SubType = BodyArmour
-            return
-        }
-        IfInString, A_LoopField, Mantle
-        {
-            BaseType = Armour
-            SubType = BodyArmour
-            return
-        }
-        IfInString, A_LoopField, Shell
-        {
-            BaseType = Armour
-            SubType = BodyArmour
-            return
-        }
-        
-        ; Belts, Amulets, Rings, Quivers, Flasks
+		; Belts, Amulets, Rings, Quivers, Flasks
         IfInString, A_LoopField, Rustic Sash
         {
             BaseType = Item
@@ -1045,14 +1010,30 @@ ParseItemType(ItemDataStats, ItemDataNamePlate, ByRef BaseType, ByRef SubType, B
             BaseType = Armour
             SubType = Boots
             return
-        }                   
+        }
+
+        ; BodyArmour
+		If (RegExMatch(A_LoopField, "[Pp]late$|Leather$|Garb$|Brigandine$|Robe$|Vest$|Chainmail$|Ringmail$|Tunic$|Vestment$|Regalia$|Doublet$|Armour$|Lamellar$|Coat$|Jacket$|Raiment$|Hauberk$"))
+        {
+            BaseType = Armour
+            SubType = BodyArmour
+            return
+        }
+
+		If (RegExMatch(A_LoopField, "Full Wyrmscale|Full Dragonscale|Silken Wrap|Necromancer Silks|Shabby Jerkin"))
+        {
+            BaseType = Armour
+            SubType = BodyArmour
+            return
+        }
+			
     }
 
     ; TODO: need a reliable way to determine sub type for armour
     ; right now it's just determine anything else first if it's
     ; not that, it's armour.
-    BaseType = Armour
-    SubType = Armour
+    ; BaseType = Armour
+    ; SubType = Armour
 }
 
 GetClipboardContents(DropNewlines=False)
