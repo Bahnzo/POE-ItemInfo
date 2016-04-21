@@ -630,6 +630,12 @@ ParseElementalDamage(String, DmgType, ByRef DmgLo, ByRef DmgHi)
         {
             return
         }
+		IfInString, String, Damage to Spells
+        {
+		    StringSplit, Arr, String, %A_Space%
+            StringSplit, Arr, Arr2, -
+            return Arr1+Arr2
+        }
         IfNotInString, String, increased 
         {
             StringSplit, Arr, String, %A_Space%
