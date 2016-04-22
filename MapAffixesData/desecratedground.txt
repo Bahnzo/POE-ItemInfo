@@ -1,0 +1,2 @@
+DarkShrine:($)Warband ~ All Renegades spawn sequential (T)The Renegades Trial begins in 30 seconds. It ends if you run away. Be prepared to die
+68|00

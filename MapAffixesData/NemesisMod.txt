@@ -1,0 +1,2 @@
+DarkShrine:(G)Item_Jewel ~ Drops 5 normal rarity jewels (T)No power but what you can make of them
+68|00

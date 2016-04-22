@@ -1,0 +1,4 @@
+DarkShrine:(G)Buff_Shrine ~ Echoing (T)Let your rage flow freely
+68|20
+74|30
+79|40

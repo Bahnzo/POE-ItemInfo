@@ -1,0 +1,4 @@
+DarkShrine:(B)Mod ~ Battering Tempest (T)You feel buffeted by a strong gust
+68|20
+74|30
+79|40

@@ -1,0 +1,4 @@
+DarkShrine:(G)Box ~ Regular (T)A miser's trove awaits you
+68|20
+74|40
+79|60

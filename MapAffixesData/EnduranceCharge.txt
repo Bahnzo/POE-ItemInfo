@@ -1,0 +1,4 @@
+DarkShrine:(B)Special ~ Removes all items in vendors (T)Not for sale
+68|1
+74|2
+79|3
