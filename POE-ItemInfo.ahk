@@ -2427,7 +2427,7 @@ LookupRemainingAffixBracket(Filename, ItemLevel, CurrValue, Bracket, ByRef Brack
 }
 
 
-; TODO : fix the COMPLEX AFFIXES with right ValueRange and AffixType
+
 ParseMapAffixes(MapTierData,ItemDataAffixes, Item)
 {
 		
@@ -2437,7 +2437,7 @@ ParseMapAffixes(MapTierData,ItemDataAffixes, Item)
     ItemBaseType := Item.BaseType
     ItemSubType := Item.SubType
 	
-	; MapLevel for Monster Life Judgment
+	; MapTier for "more Monster Life" judgment
 	StringReplace, TempResult, MapTierData, `n, ``, All
 	StringSplit, MapTierDataParts, TempResult, ``,
 	StringRight, MapTierString, MapTierDataParts1, 3
@@ -2464,14 +2464,15 @@ ParseMapAffixes(MapTierData,ItemDataAffixes, Item)
         CurrTier := 0
         BracketLevel := 0
 		
-		; --- COMPLEX AFFIXES ---
-		; more Monster Life
+		; --- COMPLEX PREFIXES ---
+		; 2 Prefixes with 3 Description
 		; Monsters cannot be Stunned & more Monster Life
+		; more Monster Life
 		IfInString, A_LoopField, Monsters cannot be Stunned
 		{
 			ValueRange := LookupAffixData("MapAffixesData\MonsterscannotbeStunned.txt", ItemLevel, CurrValue, "", CurrTier)
 			NumPrefixes += 1
-			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Prefix", ValueRange, CurrTier), A_Index)
+			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Comp. Prefix", ValueRange, CurrTier), A_Index)
 			Continue
 		}
 		IfInString, A_LoopField, more Monster Life
@@ -2491,14 +2492,14 @@ ParseMapAffixes(MapTierData,ItemDataAffixes, Item)
 					{
 						ValueRange := LookupAffixData("MapAffixesData\moreMonsterLife_MonsterscannotbeStunned_moreMonsterLife.txt", ItemLevel, CurrValue, "", CurrTier)
 						NumPrefixes += 1
-						AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Prefix", ValueRange, CurrTier), A_Index)
+						AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Comp. Prefix+Prefix", ValueRange, CurrTier), A_Index)
 						Continue
 					}
 					else
 					{				
 						ValueRange := LookupAffixData("MapAffixesData\MonsterscannotbeStunned_moreMonsterLife.txt", ItemLevel, CurrValue, "", CurrTier)
 						NumPrefixes += 0
-						AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Prefix", ValueRange, CurrTier), A_Index)
+						AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Comp. Prefix", ValueRange, CurrTier), A_Index)
 						Continue
 					}
 				}
@@ -2508,14 +2509,14 @@ ParseMapAffixes(MapTierData,ItemDataAffixes, Item)
 					{
 						ValueRange := LookupAffixData("MapAffixesData\moreMonsterLife_MonsterscannotbeStunned_moreMonsterLife.txt", ItemLevel, CurrValue, "", CurrTier)
 						NumPrefixes += 1
-						AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Prefix", ValueRange, CurrTier), A_Index)
+						AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Comp. Prefix+Prefix", ValueRange, CurrTier), A_Index)
 						Continue
 					}
 					else
 					{
 						ValueRange := LookupAffixData("MapAffixesData\MonsterscannotbeStunned_moreMonsterLife.txt", ItemLevel, CurrValue, "", CurrTier)
 						NumPrefixes += 0
-						AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Prefix", ValueRange, CurrTier), A_Index)
+						AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Comp. Prefix", ValueRange, CurrTier), A_Index)
 						Continue
 					}
 				}
@@ -2525,49 +2526,23 @@ ParseMapAffixes(MapTierData,ItemDataAffixes, Item)
 					{
 						ValueRange := LookupAffixData("MapAffixesData\moreMonsterLife_MonsterscannotbeStunned_moreMonsterLife.txt", ItemLevel, CurrValue, "", CurrTier)
 						NumPrefixes += 1
-						AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Prefix", ValueRange, CurrTier), A_Index)
+						AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Comp. Prefix+Prefix", ValueRange, CurrTier), A_Index)
 						Continue
 					}
 					else
 					{
 						ValueRange := LookupAffixData("MapAffixesData\MonsterscannotbeStunned_moreMonsterLife.txt", ItemLevel, CurrValue, "", CurrTier)
 						NumPrefixes += 0
-						AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Prefix", ValueRange, CurrTier), A_Index)
+						AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Comp. Prefix", ValueRange, CurrTier), A_Index)
 						Continue					
 					}
 				}
 			}
-		}
-			
-		; Prefix increased Life	& increased Area of Effect
-		; Suffix increased Area of Effect
-		IfInString, A_LoopField, increased Life
-		{
-			ValueRange := LookupAffixData("MapAffixesData\UniqueBossincreasedLife.txt", ItemLevel, CurrValue, "", CurrTier)
-			NumPrefixes += 1
-			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Prefix", ValueRange, CurrTier), A_Index)
-			Continue
-		}
-		IfInString, A_LoopField, increased Area of Effect
-		{
-			IfInString, A_LoopField, Unique Boss has
-			{
-				ValueRange := LookupAffixData("MapAffixesData\UniqueBossincreasedAreaofEffect.txt", ItemLevel, CurrValue, "", CurrTier)
-				NumPrefixes += 0
-				AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Prefix", ValueRange, CurrTier), A_Index)
-				Continue
-			}
-			IfInString, A_LoopField, Monsters have
-			{
-				ValueRange := LookupAffixData("MapAffixesData\MonstersincreasedAreaofEffect.txt", ItemLevel, CurrValue, "", CurrTier)
-				NumSuffixes += 1
-				AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Suffix", ValueRange, CurrTier), A_Index)
-				Continue
-			}
-		}
-		
+		}	
 
-		; 32Prefixes and 37Description + 1Zana Prefix
+		; --- MAP PREIXES ---
+		; 30 Prefixes with 35 Description & 1 Zana Prefix
+		
 		; Zana Prefix
 		IfInString, A_LoopField, additional Invasion Boss
 		{
@@ -2576,6 +2551,74 @@ ParseMapAffixes(MapTierData,ItemDataAffixes, Item)
 			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Prefix", ValueRange, CurrTier), A_Index)
 			Continue
 		}
+		
+		IfInString, A_LoopField, increased Life
+		{
+			ValueRange := LookupAffixData("MapAffixesData\UniqueBossincreasedLife.txt", ItemLevel, CurrValue, "", CurrTier)
+			NumPrefixes += 1
+			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Comp. Prefix", ValueRange, CurrTier), A_Index)
+			Continue
+		}
+		If RegExMatch(A_LoopField, "Boss has \d+?\% increased Area")
+		{
+			ValueRange := LookupAffixData("MapAffixesData\UniqueBossincreasedAreaofEffect.txt", ItemLevel, CurrValue, "", CurrTier)
+			NumPrefixes += 0
+			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Comp. Prefix", ValueRange, CurrTier), A_Index)
+			Continue
+		}
+		
+		IfInString, A_LoopField, Monster Movement Speed
+		{
+			ValueRange := LookupAffixData("MapAffixesData\MonsterMovementSpeed.txt", ItemLevel, CurrValue, "", CurrTier)
+			NumPrefixes += 1
+			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Comp. Prefix", ValueRange, CurrTier), A_Index)
+			Continue
+		}
+		IfInString, A_LoopField, Monster Attack Speed
+		{
+			ValueRange := LookupAffixData("MapAffixesData\MonsterAttackSpeed.txt", ItemLevel, CurrValue, "", CurrTier)
+			NumPrefixes += 0
+			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Comp. Prefix", ValueRange, CurrTier), A_Index)
+			Continue
+		}
+		IfInString, A_LoopField, Monster Cast Speed
+		{
+			ValueRange := LookupAffixData("MapAffixesData\MonsterCastSpeed.txt", ItemLevel, CurrValue, "", CurrTier)
+			NumPrefixes += 0
+			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Comp. Prefix", ValueRange, CurrTier), A_Index)
+			Continue
+		}
+		
+		IfInString, A_LoopField, Unique Boss deals
+		{
+			ValueRange := LookupAffixData("MapAffixesData\UniqueBossincreasedDamage.txt", ItemLevel, CurrValue, "", CurrTier)
+			NumPrefixes += 1
+			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Comp. Prefix", ValueRange, CurrTier), A_Index)
+			Continue
+		}
+		IfInString, A_LoopField, increased Attack and Cast Speed
+		{
+			ValueRange := LookupAffixData("MapAffixesData\UniqueBossincreasedAttackandCastSpeed.txt", ItemLevel, CurrValue, "", CurrTier)
+			NumPrefixes += 0
+			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Comp. Prefix", ValueRange, CurrTier), A_Index)
+			Continue
+		}
+		
+		IfInString, A_LoopField, Nemesis Mod
+		{
+			ValueRange := LookupAffixData("MapAffixesData\NemesisMod.txt", ItemLevel, CurrValue, "", CurrTier)
+			NumPrefixes += 1
+			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Comp. Prefix", ValueRange, CurrTier), A_Index)
+			Continue
+		}
+		IfInString, A_LoopField, more Rare Monsters
+		{
+			ValueRange := LookupAffixData("MapAffixesData\moreRareMonsters.txt", ItemLevel, CurrValue, "", CurrTier)
+			NumPrefixes += 0
+			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Comp. Prefix", ValueRange, CurrTier), A_Index)
+			Continue
+		}
+		
 		IfInString, A_LoopField, Monster Physical Damage Reduction
 		{
 			ValueRange := LookupAffixData("MapAffixesData\MonsterPhysicalDamageReduction.txt", ItemLevel, CurrValue, "", CurrTier)
@@ -2587,29 +2630,6 @@ ParseMapAffixes(MapTierData,ItemDataAffixes, Item)
 		{
 			ValueRange := LookupAffixData("MapAffixesData\extraDamageasFire.txt", ItemLevel, CurrValue, "", CurrTier)
 			NumPrefixes += 1
-			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Prefix", ValueRange, CurrTier), A_Index)
-			Continue
-		}
-		IfInString, A_LoopField, Monster Movement Speed
-		{
-			ValueRange := LookupAffixData("MapAffixesData\MonsterMovementSpeed.txt", ItemLevel, CurrValue, "", CurrTier)
-			NumPrefixes += 1
-			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Prefix", ValueRange, CurrTier), A_Index)
-			Continue
-		}
-		; same prefix with Monster Movement Speed
-		IfInString, A_LoopField, Monster Attack Speed
-		{
-			ValueRange := LookupAffixData("MapAffixesData\MonsterAttackSpeed.txt", ItemLevel, CurrValue, "", CurrTier)
-			NumPrefixes += 0
-			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Prefix", ValueRange, CurrTier), A_Index)
-			Continue
-		}
-		; same prefix with Monster Movement Speed
-		IfInString, A_LoopField, Monster Cast Speed
-		{
-			ValueRange := LookupAffixData("MapAffixesData\MonsterCastSpeed.txt", ItemLevel, CurrValue, "", CurrTier)
-			NumPrefixes += 0
 			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Prefix", ValueRange, CurrTier), A_Index)
 			Continue
 		}
@@ -2648,21 +2668,6 @@ ParseMapAffixes(MapTierData,ItemDataAffixes, Item)
 			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Prefix", ValueRange, CurrTier), A_Index)
 			Continue
 		}
-		IfInString, A_LoopField, Unique Boss deals
-		{
-			ValueRange := LookupAffixData("MapAffixesData\UniqueBossincreasedDamage.txt", ItemLevel, CurrValue, "", CurrTier)
-			NumPrefixes += 1
-			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Prefix", ValueRange, CurrTier), A_Index)
-			Continue
-		}
-		; same prefix with Unique Boss deals
-		IfInString, A_LoopField, increased Attack and Cast Speed
-		{
-			ValueRange := LookupAffixData("MapAffixesData\UniqueBossincreasedAttackandCastSpeed.txt", ItemLevel, CurrValue, "", CurrTier)
-			NumPrefixes += 0
-			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Prefix", ValueRange, CurrTier), A_Index)
-			Continue
-		}
 		IfInString, A_LoopField, of Physical Damage
 		{
 			ValueRange := LookupAffixData("MapAffixesData\MonstersreflectPhysicalDamage.txt", ItemLevel, CurrValue, "", CurrTier)
@@ -2695,21 +2700,6 @@ ParseMapAffixes(MapTierData,ItemDataAffixes, Item)
 		{
 			ValueRange := LookupAffixData("MapAffixesData\additionalRogueExiles.txt", ItemLevel, CurrValue, "", CurrTier)
 			NumPrefixes += 1
-			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Prefix", ValueRange, CurrTier), A_Index)
-			Continue
-		}
-		IfInString, A_LoopField, Nemesis Mod
-		{
-			ValueRange := LookupAffixData("MapAffixesData\NemesisMod.txt", ItemLevel, CurrValue, "", CurrTier)
-			NumPrefixes += 1
-			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Prefix", ValueRange, CurrTier), A_Index)
-			Continue
-		}
-		; same prefix with Nemesis Mod
-		IfInString, A_LoopField, more Rare Monsters
-		{
-			ValueRange := LookupAffixData("MapAffixesData\moreRareMonsters.txt", ItemLevel, CurrValue, "", CurrTier)
-			NumPrefixes += 0
 			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Prefix", ValueRange, CurrTier), A_Index)
 			Continue
 		}
@@ -2812,22 +2802,62 @@ ParseMapAffixes(MapTierData,ItemDataAffixes, Item)
 			Continue
 		}
 		
-		; 23Suffixes and 25Description
+		; --- MAP SUFFIXES ---
+		; 24 Suffixes with 27 Description
+		
+		If RegExMatch(A_LoopField, "Monsters have \d+?\% increased Area")
+		{
+			ValueRange := LookupAffixData("MapAffixesData\MonstersincreasedAreaofEffect.txt", ItemLevel, CurrValue, "", CurrTier)
+			NumSuffixes += 1
+			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Suffix", ValueRange, CurrTier), A_Index)
+			Continue
+		}	
+		
+		IfInString, A_LoopField, more Magic Monsters
+		{
+			ValueRange := LookupAffixData("MapAffixesData\moreMagicMonsters.txt", ItemLevel, CurrValue, "", CurrTier)
+			NumSuffixes += 0
+			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Comp. Suffix", ValueRange, CurrTier), A_Index)
+			Continue
+		}
+		IfInString, A_LoopField, Bloodline
+		{
+			ValueRange := LookupAffixData("MapAffixesData\Bloodline.txt", ItemLevel, CurrValue, "", CurrTier)
+			NumSuffixes += 1
+			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Comp. Suffix", ValueRange, CurrTier), A_Index)
+			Continue
+		}
+		
 		IfInString, A_LoopField, increased Critical Strike Chance
 		{
 			ValueRange := LookupAffixData("MapAffixesData\MonstersincreasedCriticalStrikeChance.txt", ItemLevel, CurrValue, "", CurrTier)
 			NumSuffixes += 1
-			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Suffix", ValueRange, CurrTier), A_Index)
+			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Comp. Suffix", ValueRange, CurrTier), A_Index)
 			Continue
 		}
-		; same suffix with increased Critical Strike Chance
 		IfInString, A_LoopField, to Monster Critical Strike Multiplier
 		{
 			ValueRange := LookupAffixData("MapAffixesData\MonstersincreasedCriticalStrikeMultiplier.txt", ItemLevel, CurrValue, "", CurrTier)
 			NumSuffixes += 0
-			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Suffix", ValueRange, CurrTier), A_Index)
+			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Comp. Suffix", ValueRange, CurrTier), A_Index)
 			Continue
 		}
+		
+		IfInString, A_LoopField, Cannot Leech Life
+		{
+			ValueRange := LookupAffixData("MapAffixesData\CannotLeech.txt", ItemLevel, CurrValue, "", CurrTier)
+			NumSuffixes += 1
+			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Comp. Suffix", ValueRange, CurrTier), A_Index)
+			Continue
+		}
+		IfInString, A_LoopField, Cannot Leech Mana
+		{
+			ValueRange := LookupAffixData("MapAffixesData\CannotLeech.txt", ItemLevel, CurrValue, "", CurrTier)
+			NumSuffixes += 0
+			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Comp. Suffix", ValueRange, CurrTier), A_Index)
+			Continue
+		}
+		
 		IfInString, A_LoopField, desecrated ground
 		{
 			ValueRange := LookupAffixData("MapAffixesData\desecratedground.txt", ItemLevel, CurrValue, "", CurrTier)
@@ -2905,21 +2935,6 @@ ParseMapAffixes(MapTierData,ItemDataAffixes, Item)
 			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Suffix", ValueRange, CurrTier), A_Index)
 			Continue
 		}
-		IfInString, A_LoopField, Bloodline
-		{
-			ValueRange := LookupAffixData("MapAffixesData\Bloodline.txt", ItemLevel, CurrValue, "", CurrTier)
-			NumSuffixes += 1
-			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Suffix", ValueRange, CurrTier), A_Index)
-			Continue
-		}
-		; same suffix with Bloodline
-		IfInString, A_LoopField, more Magic Monsters
-		{
-			ValueRange := LookupAffixData("MapAffixesData\moreMagicMonsters.txt", ItemLevel, CurrValue, "", CurrTier)
-			NumSuffixes += 0
-			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Suffix", ValueRange, CurrTier), A_Index)
-			Continue
-		}
 		IfInString, A_LoopField, Poison
 		{
 			ValueRange := LookupAffixData("MapAffixesData\Poison.txt", ItemLevel, CurrValue, "", CurrTier)
@@ -2980,20 +2995,6 @@ ParseMapAffixes(MapTierData,ItemDataAffixes, Item)
 		{
 			ValueRange := LookupAffixData("MapAffixesData\Vulnerability.txt", ItemLevel, CurrValue, "", CurrTier)
 			NumSuffixes += 1
-			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Suffix", ValueRange, CurrTier), A_Index)
-			Continue
-		}
-		IfInString, A_LoopField, Cannot Leech Life
-		{
-			ValueRange := LookupAffixData("MapAffixesData\CannotLeech.txt", ItemLevel, CurrValue, "", CurrTier)
-			NumSuffixes += 1
-			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Suffix", ValueRange, CurrTier), A_Index)
-			Continue
-		}
-		IfInString, A_LoopField, Cannot Leech Mana
-		{
-			ValueRange := LookupAffixData("MapAffixesData\CannotLeech.txt", ItemLevel, CurrValue, "", CurrTier)
-			NumSuffixes += 0
 			AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Suffix", ValueRange, CurrTier), A_Index)
 			Continue
 		}
