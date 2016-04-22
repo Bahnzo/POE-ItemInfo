@@ -789,7 +789,7 @@ ParseItemType(ItemDataStats, ItemDataNamePlate, ByRef BaseType, ByRef SubType, B
     }
 
     ; Check name plate section 
-	; yuwei edit : fix for some map with cage in first line will consider as helmet
+	; yuwei111 edit : fix for some map with cage in first line will consider as helmet
 	StringReplace, TempResult, ItemDataNamePlate, `n, ``, All
 	StringSplit, NameDataParts, TempResult, ``,
 	NameDataIndexLast := NameDataParts0
@@ -1256,7 +1256,7 @@ LookupAffixData(Filename, ItemLevel, Value, ByRef BracketLevel="", ByRef Tier=0)
         }
         ; Yes, this is correct incrementing MaxTier here and not before the break!
 		
-		; yuwei edit : for DarkShrine data in the first line
+		; yuwei111 edit : for DarkShrine data in the first line
 		IfInString, A_LoopReadLine, DarkShrine
 		{
 			MaxTier -= 1
@@ -1269,7 +1269,7 @@ LookupAffixData(Filename, ItemLevel, Value, ByRef BracketLevel="", ByRef Tier=0)
     {  
         AffixDataIndex += 1
 		
-		; yuwei edit : for DarkShrine data in the first line
+		; yuwei111 edit : for DarkShrine data in the first line
 		IfInString, A_LoopReadLine, DarkShrine
 		{
 			AffixDataIndex -= 1
@@ -2431,7 +2431,7 @@ LookupRemainingAffixBracket(Filename, ItemLevel, CurrValue, Bracket, ByRef Brack
     return RemainderBracket
 }
 
-; yuwei edit
+; yuwei111 edit
 ParseMapAffixes(MapTierData,ItemDataAffixes, Item)
 {
 		
@@ -4644,9 +4644,14 @@ ParseAffixes(ItemDataAffixes, Item)
             {
                 ValueRange := LookupAffixData("data\ToMaxESHelmet.txt", ItemLevel, CurrValue, "", CurrTier)
             }
+			; yuwei111 edit
+			Else If (ItemSubType == "Shield")
+            {
+                ValueRange := LookupAffixData("data\ToMaxESShield.txt", ItemLevel, CurrValue, "", CurrTier)
+            }
             Else
             {
-                ValueRange := LookupAffixData("data\ToMaxESArmourandShield.txt", ItemLevel, CurrValue, "", CurrTier)
+                ValueRange := LookupAffixData("data\ToMaxESArmour.txt", ItemLevel, CurrValue, "", CurrTier)
             }
             AppendAffixInfo(MakeAffixDetailLine(A_LoopField, "Prefix", ValueRange, CurrTier), A_Index)
             NumPrefixes += 1
@@ -5082,14 +5087,10 @@ ParseAffixes(ItemDataAffixes, Item)
             {
                 ValueRange := LookupAffixData("data\MaxLifeShield.txt", ItemLevel, CurrValue, "", CurrTier)
             }
-            Else If (ItemSubType == "BodyArmour")
+			; yuwei111 edit
+			Else If (ItemSubType == "Helmet" or ItemSubType == "Belt")
             {
-                ValueRange := LookupAffixData("data\MaxLifeBodyArmour.txt", ItemLevel, CurrValue, "", CurrTier)
-            }
-			; yuwei edit
-			Else If (ItemSubType == "Helmet")
-            {
-                ValueRange := LookupAffixData("data\MaxLifeHelmet.txt", ItemLevel, CurrValue, "", CurrTier)
+                ValueRange := LookupAffixData("data\MaxLifeHelmetBelt.txt", ItemLevel, CurrValue, "", CurrTier)
             }
             ;Bahnzo Edit for Boots, Gloves and Rings
             Else If (ItemSubType == "Boots")
