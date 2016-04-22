@@ -789,7 +789,12 @@ ParseItemType(ItemDataStats, ItemDataNamePlate, ByRef BaseType, ByRef SubType, B
     }
 
     ; Check name plate section 
-    Loop, Parse, ItemDataNamePlate, `n, `r
+	; fix for some map with cage in first line will consider as helmet
+	StringReplace, TempResult, ItemDataNamePlate, `n, ``, All
+	StringSplit, NameDataParts, TempResult, ``,
+	NameDataIndexLast := NameDataParts0
+    NameDataPartsLast := NameDataParts%NameDataIndexLast%
+	Loop, Parse, NameDataPartsLast, `n, `r
     {
         ; a few cases that cause incorrect id later
         ; and thus should come first
