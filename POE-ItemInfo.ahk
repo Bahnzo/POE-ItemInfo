@@ -789,7 +789,7 @@ ParseItemType(ItemDataStats, ItemDataNamePlate, ByRef BaseType, ByRef SubType, B
     }
 
     ; Check name plate section 
-	; fix for some map with cage in first line will consider as helmet
+	; yuwei edit : fix for some map with cage in first line will consider as helmet
 	StringReplace, TempResult, ItemDataNamePlate, `n, ``, All
 	StringSplit, NameDataParts, TempResult, ``,
 	NameDataIndexLast := NameDataParts0
@@ -1256,7 +1256,7 @@ LookupAffixData(Filename, ItemLevel, Value, ByRef BracketLevel="", ByRef Tier=0)
         }
         ; Yes, this is correct incrementing MaxTier here and not before the break!
 		
-		; for DarkShrine data in the first line
+		; yuwei edit : for DarkShrine data in the first line
 		IfInString, A_LoopReadLine, DarkShrine
 		{
 			MaxTier -= 1
@@ -1269,7 +1269,7 @@ LookupAffixData(Filename, ItemLevel, Value, ByRef BracketLevel="", ByRef Tier=0)
     {  
         AffixDataIndex += 1
 		
-		; for DarkShrine data in the first line
+		; yuwei edit : for DarkShrine data in the first line
 		IfInString, A_LoopReadLine, DarkShrine
 		{
 			AffixDataIndex -= 1
@@ -2431,8 +2431,7 @@ LookupRemainingAffixBracket(Filename, ItemLevel, CurrValue, Bracket, ByRef Brack
     return RemainderBracket
 }
 
-
-
+; yuwei edit
 ParseMapAffixes(MapTierData,ItemDataAffixes, Item)
 {
 		
@@ -5086,6 +5085,11 @@ ParseAffixes(ItemDataAffixes, Item)
             Else If (ItemSubType == "BodyArmour")
             {
                 ValueRange := LookupAffixData("data\MaxLifeBodyArmour.txt", ItemLevel, CurrValue, "", CurrTier)
+            }
+			; yuwei edit
+			Else If (ItemSubType == "Helmet")
+            {
+                ValueRange := LookupAffixData("data\MaxLifeHelmet.txt", ItemLevel, CurrValue, "", CurrTier)
             }
             ;Bahnzo Edit for Boots, Gloves and Rings
             Else If (ItemSubType == "Boots")
