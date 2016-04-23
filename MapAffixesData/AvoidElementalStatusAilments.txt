@@ -1,0 +1,4 @@
+DarkShrine:(X)Special ~ A new darkshrine in the zone (T)I am Twinned
+68|40
+74|60
+79|100

@@ -1,0 +1,4 @@
+DarkShrine:(#)Mod ~ All monsters life reduced to 1 (T)Deliver the killing blow
+68|20
+74|25
+79|30

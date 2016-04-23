@@ -1,0 +1,4 @@
+DarkShrine:(B)Special ~ Depletes all flask charges (T)Your sustenance is depleted
+68|160-200
+74|260-300
+79|360-400

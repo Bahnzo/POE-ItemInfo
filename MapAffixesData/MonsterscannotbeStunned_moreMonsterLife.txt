@@ -1,0 +1,4 @@
+DarkShrine:(G)Currency ~ Shrine drop a regal after keeping in screen for 40 seconds (T)Good things come to those who wait
+68|15-19
+74|20-24
+79|25-30

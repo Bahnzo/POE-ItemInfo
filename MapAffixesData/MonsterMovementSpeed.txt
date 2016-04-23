@@ -1,0 +1,4 @@
+DarkShrine:(#)Buff_Shrine ~ Divine (T)Become the nightmare
+68|15-20
+74|20-25
+79|25-30

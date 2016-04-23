@@ -1,0 +1,4 @@
+DarkShrine:(#)Box ~ Strange Barrel (T)Sensible objects await you
+68|15-19
+74|20-24
+79|25-30
